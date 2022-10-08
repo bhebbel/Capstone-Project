@@ -1,0 +1,53 @@
+---
+title: "Diamond"
+author: "Ben Hebbel"
+date: "2022-09-14"
+output: word_document
+---
+
+
+
+## Reading in the Data
+
+This block of code shows the data set being read into the R-studio environment. The data set is put into a data frame called diamond. The head() function is used to display the first five values in the diamonds data set. The library ggplot is also loaded into the environment to help create the data visualizations.
+```{r}
+library(ggplot2)
+diamond <- read.csv('diamonds.csv')
+head(diamond, 5)
+```
+
+## Summary of Data 
+
+This block of code calculates the summary statistics of the data set. The summary() function is used to complete the calculation. This function is used to get a better understanding the data set. It gives a five number summary on numerical values while it gives the class and mode of non-numerical values. 
+
+```{r}
+summary(diamond)
+```
+## Price Distrobution
+
+The code block below shows the distribution of the variable price. It also shows the cut of the diamond. As you can see most the diamonds are distributed on the left-hand side of the histogram. The price of a diamond can range from under 1,000  all the way up to around 20,000 dollars. It does show that there are diamonds that have a "very good" cut rating under 5,000 dollars. This graph shows that Kay Jewlers can get diamonds that have a good cut rating for a low price.  
+```{r}
+ggplot(diamond, aes(x = price, fill = cut))+geom_histogram(binwidth = 250)
+```
+
+## Color Histogram
+
+This block of code shows a histogram comparing the price to the color of the diamonds in the data set. The color map shows that there are only a few diamonds that have a color grade of j. It also shows that most of the diamonds with a color grade of D, which is the best, are below 5,000 dollars. This shows that Kay Jewelers can purhcas diamonds for a low price that have a the best color grade. 
+```{r}
+ggplot(diamond, aes(x = price, fill = color))+geom_histogram(binwidth = 250)
+```
+
+## Box Plot
+
+This block of code shows a box plot comparing the clarity of a diamond to the price. the display shows that there are a lot of outliers in the data. The box plot shows the the median, upper and lower quartile, and wiskers; anything that is outside of the box are considered to be extreme (DataCamp, 2020). the outliers in the plot show that each clarity category has diamonds that are expensive. But all the boxes have a median that is below 5,000 dollars. 
+
+```{r}
+ggplot(diamond, aes(x=clarity, y=price, fill = clarity)) + geom_boxplot(outlier.colour = 'black', outlier.shape = 16, outlier.size = 1)
+```
+
+## Scatter Plot
+
+The scatter plot shows a comparison between the price and the carat of the diamonds in the data set. This graph is shows that the carat highly affects the price of a diamond. The majority of diamonds in the data set at or below three carats. The graphs shows that diamonds that are one carat and above has a price of about 3,000 dollars all the way to about 20,000 dollars. Diamonds that are above three carats are going to be expensive. 
+```{r}
+ggplot(diamond) + geom_point(mapping = aes(x = price, y = carat, color = carat))
+```
